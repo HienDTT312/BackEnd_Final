@@ -4,8 +4,8 @@ module.exports = (sequelize, type) => sequelize.define('products', {
     product_id: {
       type: type.INTEGER, autoIncrement: true, primaryKey: true, allowNull: false,
     },
-    user_id: {
-      type: type.INTEGER, allowNull: false,
+    brand_id: {
+      type: type.INTEGER, allowNull: true,
     },
     title: {
       type: type.STRING(100), allowNull: false,
@@ -17,7 +17,16 @@ module.exports = (sequelize, type) => sequelize.define('products', {
       type: type.INTEGER, allowNull: true,
     },
     status: {
-      type: type.STRING(20), allowNull: false, defaultValue: IDEA_STATUS.FIRST_CLOSURE,
+      type: type.BOOLEAN, allowNull: true,
+    },
+    brand_name: {
+      type: type.TEXT, allowNull: true,
+    },
+    supplier_name: {
+      type: type.TEXT, allowNull: true,
+    },
+    supplier_id: {
+      type: type.INTEGER, allowNull: true,
     },
     created_date: { type: type.DATE, allowNull: true, defaultValue: new Date()   },
     updated_date: { type: type.DATE, allowNull: true,  },

@@ -4,6 +4,8 @@ const userModel = require('./users');
 const roleModel = require('./roles');
 const categoryModel = require('./category');
 const productModel = require('./product');
+const brandModel = require('./brand');
+const supplierModel = require('./supplier');
 const productCommentModel = require('./product_comments');
 const productDocumentModel = require('./product_documents');
 const productVoteModel = require('./product_votes');
@@ -19,6 +21,8 @@ const ProductVote = productVoteModel(sequelize, Sequelize);
 const ProductDocument = productDocumentModel(sequelize, Sequelize);
 const Aggrement = aggrementModel(sequelize, Sequelize);
 const View = viewModel(sequelize,Sequelize);
+const Brand = brandModel(sequelize, Sequelize);
+const Supplier = supplierModel(sequelize, Sequelize);
 
 
 User.hasMany(Category, { as: 'categories', foreignKey: 'staff_id', sourceKey: 'user_id'});
@@ -45,4 +49,6 @@ module.exports = {
   ProductVote,
   Aggrement,
   View,
+  Brand,
+  Supplier,
 }

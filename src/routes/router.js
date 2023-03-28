@@ -9,6 +9,8 @@ router.use(require('./categoryRoutes'));
 router.use(require('./productRoutes'));
 router.use(require('./aggrementRoutes'));
 router.use(require('./authRoutes'));
+router.use(require('./brandRoutes'));
+router.use(require('./supplierRoutes'));
 
 
 module.exports = router;

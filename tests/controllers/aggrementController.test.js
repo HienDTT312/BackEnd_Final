@@ -341,7 +341,7 @@ describe('Test aggrement controller', () => {
 
     it('it should return res status 200 and true', async () => {
       const req = {
-        
+
       };
 
       jest.spyOn(Aggrement, 'findAll').mockResolvedValueOnce([{
@@ -480,6 +480,6 @@ describe('Test aggrement controller', () => {
       });
     })
 
-    
+
   })
 })

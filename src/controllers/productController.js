@@ -1,5 +1,5 @@
 const logger = require('../services/loggerService');
-const { User, Role, Product, ProductDocument,ProductComment, ProductVote, Category, View } = require('../models');
+const { User, Role, Product, ProductDocument,ProductComment, ProductVote, Category, View, Brand, Supplier } = require('../models');
 const { Op, where } = require('sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -20,27 +20,11 @@ const JSZip = require('jszip');
 exports.createProduct = async (req, res) => {
   try {
 		const data = req.body;
-    const payload = {
-      user_id: req.user.user_id,
-      category_id: data.category_id,
-      description: data.description,
-      status: data.status,
-      title: data.title
-    }
 
-    const product = await Product.create(payload);
+    const product = await Product.create(data);
     if (product) {
       logger.info('Productd added successfully', {product});
 
-      const sendEmail = await emailService.sendEmail({
-        email_slug: EMAIL_SLUGS.IDEA_CREATED,
-        id: product.product_id,
-        created_date: product.created_date,
-        full_name: req.user.full_name,
-        title: product.title,
-        description: product.description,
-        username: manager.username,
-      })
 
       const reqFiles = [];
       for (let i = 0; i < req.files.length; i++) {
@@ -66,26 +50,12 @@ exports.getProduct = async (req, res) => {
   try {
     const where = {};
 
-    if (req.query.user_id) {
-      where.user_id = req.query.user_id;
-    }
-
-    if (req.query.product_id) {
-      where.product_id = req.query.product_id;
-    }
-
-    if (req.query.category_id) {
-      where.category_id = req.query.category_id;
-    }
 
     const products = await Product.findAll({
         where,
         include: [
           {
             model: Category, as: 'category', attributes: ['category_name']
-          },
-          {
-            model: User, as: 'user', attributes: ['full_name']
           },
         ]
       },
@@ -97,29 +67,15 @@ exports.getProduct = async (req, res) => {
     const finalResult = [];
 
     for (let i = 0; i < products.length; i++) {
-      const countLike = await ProductVote.count({
-        where: {
-          vote: 1,
-          product_id: products[i].product_id,
-        }
-      });
-
-      const countDislike = await ProductVote.count({
-        where: {
-          vote: 0,
-          product_id: products[i].product_id,
-        }
-      });
 
       finalResult.push({
         product_id: products[i].product_id,
         category_name: products[i].category.category_name,
-        full_name: products[i].user.full_name,
         title: products[i].title,
         description: products[i].description,
         status: products[i].status,
-        count_like: countLike,
-        count_dislike: countDislike,
+        brand_name:  products[i].brand_name,
+        supplier_name:  products[i].supplier_name,
         created_date: products[i].created_date,
         updated_date: products[i].updated_date,
       });
@@ -221,23 +177,7 @@ exports.exportProduct = async (req, res) => {
 exports.getOneProduct = async (req, res) => {
   try {
     const productId = req.params.product_id;
-    const userId = req.user.user_id;
 
-    const view = await View.findOne({
-      where: {
-        user_id: userId,
-        product_id: productId,
-      }
-    });
-
-    if (!view) {
-      const newView = await View.create({
-        user_id: userId,
-        product_id: productId
-      });
-
-      logger.info('User view added', { newView });
-    }
 
     const product = await Product.findOne({
         where: {
@@ -247,17 +187,8 @@ exports.getOneProduct = async (req, res) => {
           model: ProductDocument, as: 'documents',
           },
           {
-            model: ProductComment, as:'comments', include: [{
-              model: User, attributes: ['full_name', 'avatar']
-            }],
-          },
-          {
-            model: User, as: 'user', attributes: ['full_name','avatar']
-          },
-          {
             model: Category, as: 'category', attributes: ['category_name'],
           },
-
         ]
       },
     );
@@ -268,48 +199,15 @@ exports.getOneProduct = async (req, res) => {
 
     const finalResult = {
       product_id: product.product_id,
-      user_id: product.user_id,
-      full_name: product.user.full_name,
-      avatar: product.user.avatar,
       title: product.title,
       status: product.status,
       description: product.description,
       category_name: product.category.category_name,
       category_id: product.category_id,
+      brand_name: product.brand_name,
+      supplier_name: product.supplier_name,
       documents: product.documents,
     }
-
-    const comments = product.comments.map( comment => {
-      return {
-        full_name: comment.user.full_name,
-        avatar: comment.user.avatar,
-        comment: comment.comment,
-        created_date: comment.created_date,
-        updated_date: comment.updated_date,
-      }
-    });
-
-    const count = await ProductVote.findAll({
-      attributes: [
-        'vote',
-        [sequelize.fn('COUNT', sequelize.col('vote')), 'count']
-      ],
-      group: 'vote',
-      raw: true,
-      where: {
-        product_id: productId,
-      }
-    })
-
-    const views = await View.count({
-      where: {
-        product_id: productId,
-      }
-    })
-
-    finalResult.count = count;
-    finalResult.comments = comments;
-    finalResult.views = views;
 
     logger.info('Product found', { finalResult });
     return response.respondOk(res, finalResult);
@@ -383,7 +281,6 @@ exports.createComment = async (req, res) => {
       comment: data.comment,
       product_id: data.product_id,
     }
-    if (data.anonymous) payload.anonymous = data.anonymous;
 
     const comment = await ProductComment.create(payload);
 
