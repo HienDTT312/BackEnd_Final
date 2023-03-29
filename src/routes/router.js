@@ -11,6 +11,7 @@ router.use(require('./aggrementRoutes'));
 router.use(require('./authRoutes'));
 router.use(require('./brandRoutes'));
 router.use(require('./supplierRoutes'));
+router.use(require('./customerRoutes'));
 
 
 module.exports = router;

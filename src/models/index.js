@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../boostraps/mysqlConnection');
 const userModel = require('./users');
+const customerModel = require('./customer');
+
 const roleModel = require('./roles');
 const categoryModel = require('./category');
 const productModel = require('./product');
@@ -14,6 +16,8 @@ const viewModel = require('./user_view');
 
 const Role = roleModel(sequelize, Sequelize);
 const User = userModel(sequelize, Sequelize);
+const Customer = customerModel(sequelize, Sequelize);
+
 const Category = categoryModel(sequelize, Sequelize);
 const Product = productModel(sequelize, Sequelize);
 const ProductComment = productCommentModel(sequelize, Sequelize);
@@ -51,4 +55,5 @@ module.exports = {
   View,
   Brand,
   Supplier,
+  Customer,
 }
