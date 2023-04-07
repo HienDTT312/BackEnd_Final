@@ -207,6 +207,9 @@ exports.getOneProduct = async (req, res) => {
       brand_name: product.brand_name,
       supplier_name: product.supplier_name,
       documents: product.documents,
+      amount: product.amount,
+      price: product.price,
+      promotion: product.promotion,
     }
 
     logger.info('Product found', { finalResult });

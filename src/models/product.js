@@ -28,6 +28,15 @@ module.exports = (sequelize, type) => sequelize.define('products', {
     supplier_id: {
       type: type.INTEGER, allowNull: true,
     },
+    amount: {
+      type: type.INTEGER, allowNull: true,
+    },
+    price: {
+      type: type.INTEGER, allowNull: true,
+    },
+    promotion: {
+      type: type.INTEGER, allowNull: true,
+    },
     created_date: { type: type.DATE, allowNull: true, defaultValue: new Date()   },
     updated_date: { type: type.DATE, allowNull: true,  },
 }, {
