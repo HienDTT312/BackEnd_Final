@@ -25,6 +25,9 @@ module.exports = (sequelize, type) => sequelize.define('products', {
     supplier_name: {
       type: type.TEXT, allowNull: true,
     },
+    author: {
+      type: type.TEXT, allowNull: true,
+    },
     supplier_id: {
       type: type.INTEGER, allowNull: true,
     },

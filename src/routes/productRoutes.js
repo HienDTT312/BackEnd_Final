@@ -14,17 +14,17 @@ const { uploadAvatar, uploadDocument } = require('../services/uploadFileService'
 
 // Product route
 
-router.get('/project/product',isAuthenticated, productController.getProduct);
+router.get('/project/product', productController.getProduct);
 
-router.get('/project/product/:product_id',isAuthenticated, productController.getOneProduct);
+router.get('/project/product/:product_id', productController.getOneProduct);
 
-router.post('/project/product',isAuthenticated, uploadDocument.array('documents', 6), productController.createProduct);
+router.post('/project/product', uploadDocument.array('documents', 6), productController.createProduct);
 
-router.delete('/project/product/:product_id',isAuthenticated, productController.deleteProduct);
+router.delete('/project/product/:product_id', productController.deleteProduct);
 
-router.put('/project/product/:product_id',isAuthenticated, uploadDocument.array('documents', 6 ),productController.updateProduct);
+router.put('/project/product/:product_id', uploadDocument.array('documents', 6 ),productController.updateProduct);
 
-router.get('/service/product/exports',isAuthenticated, productController.exportProduct);
+router.get('/service/product/exports', productController.exportProduct);
 
 // Comment route
 
