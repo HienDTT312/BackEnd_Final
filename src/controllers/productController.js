@@ -80,6 +80,7 @@ exports.getProduct = async (req, res) => {
         supplier_name:  products[i].supplier_name,
         created_date: products[i].created_date,
         updated_date: products[i].updated_date,
+        document: products[i].documents,
       });
     }
 
