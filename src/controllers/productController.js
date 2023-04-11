@@ -53,7 +53,9 @@ exports.getProduct = async (req, res) => {
 
     const products = await Product.findAll({
         where,
-        include: [
+        include: [{
+           model: ProductDocument, as: 'documents',
+          },
           {
             model: Category, as: 'category', attributes: ['category_name']
           },

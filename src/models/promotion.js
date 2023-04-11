@@ -2,8 +2,8 @@ module.exports = (sequelize, type) => sequelize.define('promotions', {
   promotion_id: {
     type: type.INTEGER, autoIncrement: true, primaryKey: true, allowNull: false,
   },
-  promotion_name: {
-    type: type.TEXT, allowNull: false,
+  title: {
+    type: type.TEXT, allowNull: true,
   },
   discount: {
     type: type.TEXT, allowNull: false,

@@ -64,5 +64,10 @@ module.exports = {
   View,
   Brand,
   Supplier,
+  Promotion,
+  Cart,
+  Order,
+  Import,
+  Detail,
   Customer,
 }
