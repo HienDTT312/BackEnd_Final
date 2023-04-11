@@ -12,14 +12,14 @@ const { ROLES } = require("../configs/ms-constants");
 
 // brand route
 
-router.get('/service1/brand',isAuthenticated, brandController.getBrand);
+router.get('/project/brand',isAuthenticated, brandController.getBrand);
 
-router.get('/service1/brand/:brand_id',isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]),brandController.getOneBrand);
+router.get('/project/brand/:brand_id',isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]),brandController.getOneBrand);
 
-router.put('/service1/brand', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]),brandController.updateBrand);
+router.put('/project/brand', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]),brandController.updateBrand);
 
-router.post('/service1/brand', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]),brandController.createBrand);
+router.post('/project/brand', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]),brandController.createBrand);
 
-router.delete('/service1/brand/:brand_id', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]), brandController.deleteBrand);
+router.delete('/project/brand/:brand_id', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]), brandController.deleteBrand);
 
 module.exports = router;

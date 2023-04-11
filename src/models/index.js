@@ -13,6 +13,11 @@ const productDocumentModel = require('./product_documents');
 const productVoteModel = require('./product_votes');
 const aggrementModel = require('./aggrement');
 const viewModel = require('./user_view');
+const cartModel = require('./cart');
+const promotionModel = require('./promotion');
+const orderModel = require('./order');
+const detailModel = require('./detail');
+const importModel = require('./import');
 
 const Role = roleModel(sequelize, Sequelize);
 const User = userModel(sequelize, Sequelize);
@@ -27,7 +32,11 @@ const Aggrement = aggrementModel(sequelize, Sequelize);
 const View = viewModel(sequelize,Sequelize);
 const Brand = brandModel(sequelize, Sequelize);
 const Supplier = supplierModel(sequelize, Sequelize);
-
+const Cart = cartModel(sequelize, Sequelize);
+const Promotion = promotionModel(sequelize, Sequelize);
+const Detail = detailModel(sequelize, Sequelize);
+const Order = orderModel(sequelize, Sequelize);
+const Import = importModel(sequelize, Sequelize);
 
 User.hasMany(Category, { as: 'categories', foreignKey: 'staff_id', sourceKey: 'user_id'});
 

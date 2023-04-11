@@ -6,7 +6,7 @@ const loggerInstance = require('../services/loggerService');
 const sequelize = require('sequelize')
 
 
-exports.service1Test = async (req, res, next) => {
+exports.projectTest = async (req, res, next) => {
   const url = req.protocol + '://' + req.get('host')
   console.log(url);
   console.log(req.body.name);

@@ -1,7 +1,7 @@
-project: service1
+project: project
 configVersion: 1
 ---
-image: service1
+image: project
 dockerfile: Dockerfile
 args:
   GIT_SSH_PRIVATE_KEY: |-

@@ -187,6 +187,11 @@ exports.getOneProduct = async (req, res) => {
           model: ProductDocument, as: 'documents',
           },
           {
+            model: ProductComment, as:'comments', include: [{
+              model: User, attributes: ['full_name', 'avatar']
+            }],
+          },
+          {
             model: Category, as: 'category', attributes: ['category_name'],
           },
         ]
@@ -196,6 +201,30 @@ exports.getOneProduct = async (req, res) => {
     if (!product) {
       return response.respondInternalServerError(res, [customMessages.errors.productNotFound]);
     }
+
+    const comments = product.comments.map( comment => {
+      return {
+        full_name: comment.user.full_name,
+        avatar: comment.user.avatar,
+        comment: comment.comment,
+        created_date: comment.created_date,
+        updated_date: comment.updated_date,
+      }
+    });
+
+    const count = await ProductVote.findAll({
+      attributes: [
+        'vote',
+        [sequelize.fn('COUNT', sequelize.col('vote')), 'count']
+      ],
+      group: 'vote',
+      raw: true,
+      where: {
+        product_id: productId,
+      }
+    })
+
+
 
     const finalResult = {
       product_id: product.product_id,
@@ -210,7 +239,11 @@ exports.getOneProduct = async (req, res) => {
       amount: product.amount,
       price: product.price,
       promotion: product.promotion,
+      sold: product.sold,
     }
+
+    finalResult.count = count;
+    finalResult.comments = comments;
 
     logger.info('Product found', { finalResult });
     return response.respondOk(res, finalResult);

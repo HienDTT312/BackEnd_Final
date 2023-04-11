@@ -6,7 +6,7 @@ This project is using the .env file. Be sure to copy **.env.dist** to **.env** a
 1. Install [Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 2. `npm run create-rsa`
 3. Prepare a bitbucket private ssh key **WITHOUT passphrase** (either yours or [setup a new one](https://confluence.atlassian.com/bitbucket/set-up-additional-ssh-keys-271943168.html#SetupadditionalSSHkeys-ssh2)) for the following step. This is required because we use private npm package on our project.
-4. Run `sudo docker build -t service1 . --build-arg GIT_SSH_PRIVATE_KEY="$(<path-to-your-private-key)"` where **path-to-your-private-key** is something like **/home/user/.ssh/dimitris-docker**
+4. Run `sudo docker build -t project . --build-arg GIT_SSH_PRIVATE_KEY="$(<path-to-your-private-key)"` where **path-to-your-private-key** is something like **/home/user/.ssh/dimitris-docker**
 5. Run `docker run -i {your image id}`
 
 ## Using docker-compose

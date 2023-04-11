@@ -12,14 +12,14 @@ const { ROLES } = require("../configs/ms-constants");
 
 // aggrement route
 
-router.get('/service1/aggrement',isAuthenticated, aggrementController.getAggrement);
+router.get('/project/aggrement',isAuthenticated, aggrementController.getAggrement);
 
-router.get('/service1/aggrement/:aggrement_id',isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]),aggrementController.getOneAggrement);
+router.get('/project/aggrement/:aggrement_id',isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]),aggrementController.getOneAggrement);
 
-router.put('/service1/aggrement', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]),aggrementController.updateAggrement);
+router.put('/project/aggrement', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]),aggrementController.updateAggrement);
 
-router.post('/service1/aggrement', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]),aggrementController.createAggrement);
+router.post('/project/aggrement', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]),aggrementController.createAggrement);
 
-router.delete('/service1/aggrement/:aggrement_id', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]), aggrementController.deleteAggrement);
+router.delete('/project/aggrement/:aggrement_id', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]), aggrementController.deleteAggrement);
 
 module.exports = router;

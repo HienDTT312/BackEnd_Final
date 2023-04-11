@@ -3,13 +3,13 @@ const { getMessage, acknowledgeMessage, initializeConsumer } = require('../servi
 
 
 module.exports = () => {
-    let service1Channel;
-    const service1Queue = 'service1.queue';
-    
-    const service1Message = async (messageData) => {
-        const { message } = getMessage(messageData, service1Queue, service1Channel);
+    let projectChannel;
+    const projectQueue = 'project.queue';
 
-        acknowledgeMessage(messageData, service1Channel);
+    const projectMessage = async (messageData) => {
+        const { message } = getMessage(messageData, projectQueue, projectChannel);
+
+        acknowledgeMessage(messageData, projectChannel);
         console.log('Test');
         try {
             console.log('Get hehee', message);
@@ -18,7 +18,7 @@ module.exports = () => {
         }
     }
 
-    service1CreatedChannel = initializeConsumer(
-        service1Queue, service1Message, consumerConnection,
+    projectCreatedChannel = initializeConsumer(
+        projectQueue, projectMessage, consumerConnection,
     )
 }

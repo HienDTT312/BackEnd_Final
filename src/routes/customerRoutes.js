@@ -1,7 +1,7 @@
 const express = require("express");
 
 const router = express.Router();
-const service1Controller = require('../controllers/service1');
+const projectController = require('../controllers/project');
 const customerController = require('../controllers/customerController');
 const { isAuthenticated } = require('../middlewares/authentication');
 const { validator, paramsValidator, paramsBodyValidator } = require('../middlewares/validator');
@@ -15,20 +15,20 @@ const { ROLES } = require("../configs/ms-constants");
 
 // customer routes
 
-router.get('/service1/customer', isAuthenticated, customerController.getCustomer);
+router.get('/project/customer', isAuthenticated, customerController.getCustomer);
 
-router.get('/service1/customer/:username', isAuthenticated, customerController.getOneCustomer);
+router.get('/project/customer/:username', isAuthenticated, customerController.getOneCustomer);
 
-router.put('/service1/customer/:user_id', isAuthenticated, uploadAvatar.single('avatar'), customerController.updateCustomer);
+router.put('/project/customer/:user_id', isAuthenticated, uploadAvatar.single('avatar'), customerController.updateCustomer);
 
-router.put('/service1/customer/password', isAuthenticated, validator(customerPasswordSchema), customerController.updateCustomerPassword);
+router.put('/project/customer/password', isAuthenticated, validator(customerPasswordSchema), customerController.updateCustomerPassword);
 
-router.post('/service1/customer',  isAuthenticated,uploadAvatar.single('avatar'), isAuthorization([ROLES.ADMIN]), customerController.createCustomer);
+router.post('/project/customer',  isAuthenticated,uploadAvatar.single('avatar'), isAuthorization([ROLES.ADMIN]), customerController.createCustomer);
 
-router.delete('/service1/customer/:user_id', isAuthenticated,customerController.deleteCustomer);
+router.delete('/project/customer/:user_id', isAuthenticated,customerController.deleteCustomer);
 
-router.post('/service1/reset-password/:token' ,customerController.resetPassword);
+router.post('/project/reset-password/:token' ,customerController.resetPassword);
 
-router.post('/service1/forgot-password', customerController.forgotPassword);
+router.post('/project/forgot-password', customerController.forgotPassword);
 
 module.exports = router;

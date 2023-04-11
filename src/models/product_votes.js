@@ -11,8 +11,6 @@ module.exports = (sequelize, type) => sequelize.define('product_votes', {
 	product_id: {
 		type: type.INTEGER, allowNull: true,
 	},
-	created_date: { type: type.DATE, allowNull: true, defaultValue: new Date()   },
-	updated_date: { type: type.DATE, allowNull: true,  },
 }, {
 	timestamps: false,
 });

@@ -1,5 +1,5 @@
-const service1Consumer = require('../consumers/service1Consumer');
+const projectConsumer = require('../consumers/projectConsumer');
 
 module.exports = () => {
-    service1Consumer();
+    projectConsumer();
 }

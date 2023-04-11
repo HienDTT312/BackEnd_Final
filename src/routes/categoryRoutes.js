@@ -12,14 +12,14 @@ const { isAuthorization } = require("../middlewares/authorization");
 
 // category route
 
-router.get('/service1/category',isAuthenticated, categoryController.getCategory);
+router.get('/project/category',isAuthenticated, categoryController.getCategory);
 
-router.get('/service1/category/:category_id',isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]), categoryController.getOneCategory);
+router.get('/project/category/:category_id',isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]), categoryController.getOneCategory);
 
-router.put('/service1/category', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]), categoryController.updateCategory);
+router.put('/project/category', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]), categoryController.updateCategory);
 
-router.post('/service1/category', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]), categoryController.createCategory);
+router.post('/project/category', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]), categoryController.createCategory);
 
-router.delete('/service1/category/:category_id', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]), categoryController.deleteCategory);
+router.delete('/project/category/:category_id', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]), categoryController.deleteCategory);
 
 module.exports = router;

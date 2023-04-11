@@ -23,7 +23,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://103.107.182.190/service1/login",
+							"raw": "http://103.107.182.190/project/login",
 							"protocol": "http",
 							"host": [
 								"103",
@@ -32,7 +32,7 @@
 								"190"
 							],
 							"path": [
-								"service1",
+								"project",
 								"login"
 							]
 						}
@@ -54,7 +54,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://103.107.182.190/service1/user",
+							"raw": "http://103.107.182.190/project/user",
 							"protocol": "http",
 							"host": [
 								"103",
@@ -63,7 +63,7 @@
 								"190"
 							],
 							"path": [
-								"service1",
+								"project",
 								"user"
 							]
 						}
@@ -85,7 +85,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://103.107.182.190/service1/user",
+							"raw": "http://103.107.182.190/project/user",
 							"protocol": "http",
 							"host": [
 								"103",
@@ -94,7 +94,7 @@
 								"190"
 							],
 							"path": [
-								"service1",
+								"project",
 								"user"
 							]
 						}
@@ -116,7 +116,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://103.107.182.190/service1/user",
+							"raw": "http://103.107.182.190/project/user",
 							"protocol": "http",
 							"host": [
 								"103",
@@ -125,7 +125,7 @@
 								"190"
 							],
 							"path": [
-								"service1",
+								"project",
 								"user"
 							]
 						}
@@ -147,7 +147,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://103.107.182.190/service1/user/password",
+							"raw": "http://103.107.182.190/project/user/password",
 							"protocol": "http",
 							"host": [
 								"103",
@@ -156,7 +156,7 @@
 								"190"
 							],
 							"path": [
-								"service1",
+								"project",
 								"user",
 								"password"
 							]
@@ -170,7 +170,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://103.107.182.190/service1/user",
+							"raw": "http://103.107.182.190/project/user",
 							"protocol": "http",
 							"host": [
 								"103",
@@ -179,7 +179,7 @@
 								"190"
 							],
 							"path": [
-								"service1",
+								"project",
 								"user"
 							]
 						}
@@ -201,7 +201,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://103.107.182.190/service1/forgot-password",
+							"raw": "http://103.107.182.190/project/forgot-password",
 							"protocol": "http",
 							"host": [
 								"103",
@@ -210,7 +210,7 @@
 								"190"
 							],
 							"path": [
-								"service1",
+								"project",
 								"forgot-password"
 							]
 						}
@@ -232,7 +232,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://103.107.182.190/service1/reset-password/876e03005356149a44654ca5523e2ddb51e670936c36c442bc05fa2413ab8f1bb1af859dc8f0dfd058a4a2d9c243d2bb",
+							"raw": "http://103.107.182.190/project/reset-password/876e03005356149a44654ca5523e2ddb51e670936c36c442bc05fa2413ab8f1bb1af859dc8f0dfd058a4a2d9c243d2bb",
 							"protocol": "http",
 							"host": [
 								"103",
@@ -241,7 +241,7 @@
 								"190"
 							],
 							"path": [
-								"service1",
+								"project",
 								"reset-password",
 								"876e03005356149a44654ca5523e2ddb51e670936c36c442bc05fa2413ab8f1bb1af859dc8f0dfd058a4a2d9c243d2bb"
 							]
@@ -255,7 +255,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://103.107.182.190/service1/user/gaconbibenh@gmail.com",
+							"raw": "http://103.107.182.190/project/user/gaconbibenh@gmail.com",
 							"protocol": "http",
 							"host": [
 								"103",
@@ -264,7 +264,7 @@
 								"190"
 							],
 							"path": [
-								"service1",
+								"project",
 								"user",
 								"gaconbibenh@gmail.com"
 							]
@@ -292,14 +292,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3002/service1/category",
+							"raw": "http://localhost:3002/project/category",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"category"
 							]
 						}
@@ -321,14 +321,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3002/service1/category",
+							"raw": "http://localhost:3002/project/category",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"category"
 							]
 						}
@@ -341,14 +341,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3002/service1/category",
+							"raw": "http://localhost:3002/project/category",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"category"
 							]
 						}
@@ -365,14 +365,14 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:3002/service1/category/1",
+							"raw": "http://localhost:3002/project/category/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"category",
 								"1"
 							]
@@ -386,14 +386,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3002/service1/category/2",
+							"raw": "http://localhost:3002/project/category/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"category",
 								"2"
 							]
@@ -421,14 +421,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3002/service1/department",
+							"raw": "http://localhost:3002/project/department",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"department"
 							]
 						}
@@ -450,14 +450,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3002/service1/department",
+							"raw": "http://localhost:3002/project/department",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"department"
 							]
 						}
@@ -470,14 +470,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3002/service1/department",
+							"raw": "http://localhost:3002/project/department",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"department"
 							]
 						}
@@ -490,14 +490,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3002/service1/department/2",
+							"raw": "http://localhost:3002/project/department/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"department",
 								"2"
 							]
@@ -511,14 +511,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3002/service1/department/4",
+							"raw": "http://localhost:3002/project/department/4",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"department",
 								"4"
 							]
@@ -546,14 +546,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3002/service1/term",
+							"raw": "http://localhost:3002/project/term",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"term"
 							]
 						}
@@ -578,14 +578,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3002/service1/term",
+							"raw": "http://localhost:3002/project/term",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"term"
 							]
 						}
@@ -607,14 +607,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3002/service1/term",
+							"raw": "http://localhost:3002/project/term",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"term"
 							]
 						}
@@ -636,14 +636,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3002/service1/term/1",
+							"raw": "http://localhost:3002/project/term/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"term",
 								"1"
 							]
@@ -669,14 +669,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3002/service1/term/2",
+							"raw": "http://localhost:3002/project/term/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"term",
 								"2"
 							]
@@ -695,14 +695,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3002/service1/product",
+							"raw": "http://localhost:3002/project/product",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"product"
 							]
 						}
@@ -724,14 +724,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3002/service1/product/31",
+							"raw": "http://localhost:3002/project/product/31",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"product",
 								"31"
 							]
@@ -745,14 +745,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3002/service1/product/28",
+							"raw": "http://localhost:3002/project/product/28",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"product",
 								"28"
 							]
@@ -766,14 +766,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3002/service1/product/31",
+							"raw": "http://localhost:3002/project/product/31",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"product",
 								"31"
 							]
@@ -802,14 +802,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3002/service1/comment",
+							"raw": "http://localhost:3002/project/comment",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"comment"
 							]
 						}
@@ -837,14 +837,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3002/service1/comment/1",
+							"raw": "http://localhost:3002/project/comment/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"comment",
 								"1"
 							]
@@ -873,14 +873,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3002/service1/comment/3",
+							"raw": "http://localhost:3002/project/comment/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"comment",
 								"3"
 							]
@@ -909,14 +909,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3002/service1/document/3",
+							"raw": "http://localhost:3002/project/document/3",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"document",
 								"3"
 							]
@@ -936,14 +936,14 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3002/service1/comment",
+							"raw": "http://localhost:3002/project/comment",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"comment"
 							]
 						}
@@ -962,14 +962,14 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3002/service1/comment/28",
+							"raw": "http://localhost:3002/project/comment/28",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"comment",
 								"28"
 							]
@@ -989,14 +989,14 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3002/service1/comment/28",
+							"raw": "http://localhost:3002/project/comment/28",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"comment",
 								"28"
 							]
@@ -1010,14 +1010,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3002/service1/csv",
+							"raw": "http://localhost:3002/project/csv",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"csv"
 							]
 						}
@@ -1029,14 +1029,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:3002/service1/csv",
+									"raw": "http://localhost:3002/project/csv",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "3002",
 									"path": [
-										"service1",
+										"project",
 										"csv"
 									]
 								}
@@ -1105,14 +1105,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3002/service1/view",
+							"raw": "http://localhost:3002/project/view",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"view"
 							]
 						}
@@ -1152,14 +1152,14 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:3002/service1/aggrement",
+							"raw": "http://localhost:3002/project/aggrement",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"aggrement"
 							]
 						}
@@ -1187,14 +1187,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3002/service1/aggrement",
+							"raw": "http://localhost:3002/project/aggrement",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"aggrement"
 							]
 						}
@@ -1220,14 +1220,14 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:3002/service1/aggrement/1",
+							"raw": "http://localhost:3002/project/aggrement/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"aggrement",
 								"1"
 							]
@@ -1256,14 +1256,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3002/service1/aggrement",
+							"raw": "http://localhost:3002/project/aggrement",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"aggrement"
 							]
 						}
@@ -1291,14 +1291,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3002/service1/aggrement/1",
+							"raw": "http://localhost:3002/project/aggrement/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3002",
 							"path": [
-								"service1",
+								"project",
 								"aggrement",
 								"1"
 							]
