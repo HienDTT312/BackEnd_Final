@@ -2,7 +2,7 @@ module.exports = (sequelize, type) => sequelize.define('customers', {
   user_id: {
     type: type.INTEGER, autoIncrement: true, primaryKey: true, allowNull: false,
   },
-  username: { type: type.STRING(30), allowNull: false },
+  email: { type: type.STRING(30), allowNull: false },
   full_name: { type: type.STRING(30), allowNull: true },
   first_name: { type: type.STRING(15), allowNull: true },
   last_name: { type: type.STRING(15), allowNull: true },

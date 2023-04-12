@@ -11,4 +11,8 @@ router.get('/project/test', projectController.projectTest);
 
 router.get('/project/identity', isAuthenticated, authController.getIdentity);
 
+router.post('/project/customer/login', authController.loginCustomer)
+
+router.get('/project/customer/identity', isAuthenticated, authController.getCustomerIdentity);
+
 module.exports = router;

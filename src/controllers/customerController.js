@@ -53,10 +53,10 @@ exports.getCustomer = async (req, res) => {
 
 exports.getOneCustomer = async (req, res) => {
   try {
-    const username = req.params.username;
+    const email = req.params.email;
     const result = await Customer.findOne({
       where: {
-        username
+        email
       },
     });
     if (result) {
@@ -75,7 +75,7 @@ exports.createCustomer = async (req, res) => {
     const data = req.body;
     const hashedPassword = await generateHashPassword(data.password);
     const payload = {
-      username: data.username,
+      email: data.email,
       full_name: data.full_name,
       last_name:  data.last_name,
       first_name: data.first_name,
@@ -97,12 +97,12 @@ exports.createCustomer = async (req, res) => {
 
     const checkCustomernameExist = await Customer.findOne({
       where: {
-        username: data.username,
+        email: data.email,
       }
     })
 
     if (checkCustomernameExist) {
-      logger.error('Customername existed in the system', { username: checkCustomernameExist });
+      logger.error('Customername existed in the system', { email: checkCustomernameExist });
       return response.respondInternalServerError(res, [customMessages.errors.customerNameExisted]);
     }
 
@@ -111,7 +111,7 @@ exports.createCustomer = async (req, res) => {
     if (result) {
       const sendEmail = await emailService.sendEmail({
         password: data.password,
-        username: data.username,
+        email: data.email,
         email_slug: EMAIL_SLUGS.ACCOUNT_CREATED,
       });
 
@@ -172,7 +172,7 @@ exports.updateCustomerPassword = async (req, res) => {
 
     const result = await Customer.update(updateData, {
       where: {
-        username: data.username
+        email: data.email
       }
     });
     if (result) {
@@ -252,7 +252,7 @@ exports.resetPassword = async (req, res) => {
       customer.reset_token_expires = undefined;
 
       await customer.save();
-      logger.info(`Password reset for customer: ${customer.username}`);
+      logger.info(`Password reset for customer: ${customer.email}`);
       return response.respondOk(res, [customMessages.success.passwordHasBeenReset])
     }
   } catch (err) {
@@ -263,10 +263,10 @@ exports.resetPassword = async (req, res) => {
 
 exports.forgotPassword = async (req, res) => {
     try {
-      const { username } = req.body;
+      const { email } = req.body;
       const customer = await Customer.findOne({
         where: {
-          username,
+          email,
         }
       });
       logger.info('Customer found', {customer});
@@ -276,9 +276,9 @@ exports.forgotPassword = async (req, res) => {
         customer.reset_token_expires = Date.now() + config.general.resetTokenExpiration * 60 * 1000;
 
         const savedCustomer = await customer.save();
-        logger.info('Customer reset token created and saved.', { username: savedCustomer.username, reset_password_token: savedCustomer.reset_password_token, expires: savedCustomer.reset_token_expires });
+        logger.info('Customer reset token created and saved.', { email: savedCustomer.email, reset_password_token: savedCustomer.reset_password_token, expires: savedCustomer.reset_token_expires });
         const sendEmail = await emailService.sendEmail({
-          username: savedCustomer.username,
+          email: savedCustomer.email,
           reset_password_token: savedCustomer.reset_password_token,
           email_slug: EMAIL_SLUGS.PASSWORD_RESET,
           full_name: customer.full_name,

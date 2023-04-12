@@ -15,17 +15,17 @@ const { ROLES } = require("../configs/ms-constants");
 
 // customer routes
 
-router.get('/project/customer', isAuthenticated, customerController.getCustomer);
+router.get('/project/customer', customerController.getCustomer);
 
-router.get('/project/customer/:username', isAuthenticated, customerController.getOneCustomer);
+router.get('/project/customer/:username', customerController.getOneCustomer);
 
-router.put('/project/customer/:user_id', isAuthenticated, uploadAvatar.single('avatar'), customerController.updateCustomer);
+router.put('/project/customer/:user_id', uploadAvatar.single('avatar'), customerController.updateCustomer);
 
-router.put('/project/customer/password', isAuthenticated, validator(customerPasswordSchema), customerController.updateCustomerPassword);
+router.put('/project/customer/password', validator(customerPasswordSchema), customerController.updateCustomerPassword);
 
-router.post('/project/customer',  isAuthenticated,uploadAvatar.single('avatar'), isAuthorization([ROLES.ADMIN]), customerController.createCustomer);
+router.post('/project/customer',uploadAvatar.single('avatar'), customerController.createCustomer);
 
-router.delete('/project/customer/:user_id', isAuthenticated,customerController.deleteCustomer);
+router.delete('/project/customer/:user_id',customerController.deleteCustomer);
 
 router.post('/project/reset-password/:token' ,customerController.resetPassword);
 
