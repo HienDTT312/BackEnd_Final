@@ -17,6 +17,7 @@ const cartModel = require('./cart');
 const promotionModel = require('./promotion');
 const orderModel = require('./order');
 const detailModel = require('./detail');
+const supportModel = require('./support');
 const importModel = require('./import');
 
 const Role = roleModel(sequelize, Sequelize);
@@ -37,6 +38,7 @@ const Promotion = promotionModel(sequelize, Sequelize);
 const Detail = detailModel(sequelize, Sequelize);
 const Order = orderModel(sequelize, Sequelize);
 const Import = importModel(sequelize, Sequelize);
+const Support = supportModel(sequelize, Sequelize);
 
 User.hasMany(Category, { as: 'categories', foreignKey: 'staff_id', sourceKey: 'user_id'});
 
@@ -70,4 +72,5 @@ module.exports = {
   Import,
   Detail,
   Customer,
+  Support,
 }

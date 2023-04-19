@@ -1,5 +1,5 @@
 const logger = require('../services/loggerService');
-const { User, Role, Order } = require('../models');
+const { User, Role, Order, Detail } = require('../models');
 const response = require('../services/responseService');
 const customMessages = require('../configs/customMessages');
 
@@ -42,6 +42,25 @@ exports.getOneOrder = async (req, res, next) => {
     });
     if (order) {
       logger.info('Order found', { order });
+      return response.respondOk(res, order);
+    };
+    return response.respondInternalServerError(res, [customMessages.errors.orderNotFound]);
+  } catch (err) {
+    logger.error('Failed to get order', err);
+    return response.respondInternalServerError(res, [customMessages.errors.internalError]);
+  }
+}
+
+exports.getOneOrderDetail = async (req, res, next) => {
+  try {
+    const order_id = req.params.order_id;
+    const order = await Detail.findOne({
+      where: {
+        order_id,
+      }
+    });
+    if (order) {
+      logger.info('Detail found', { order });
       return response.respondOk(res, order);
     };
     return response.respondInternalServerError(res, [customMessages.errors.orderNotFound]);

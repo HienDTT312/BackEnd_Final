@@ -16,5 +16,6 @@ router.use(require('./promotionRoutes'));
 router.use(require('./cartRoutes'));
 router.use(require('./importRoutes'));
 router.use(require('./orderRoutes'));
+router.use(require('./supportRoutes'));
 
 module.exports = router;

@@ -20,6 +20,7 @@ exports.getImport = async (req, res) => {
 exports.createImport = async (req, res) => {
   try {
     const data = req.body;
+    console.log(data);
     const importProduct = await Import.create(data);
     if (importProduct) {
       logger.info('Import created success', { importProduct });
@@ -27,7 +28,7 @@ exports.createImport = async (req, res) => {
     }
     return response.respondInternalServerError(res, [customMessages.errors.internalError]);
   } catch (err) {
-    logger.error('Categogy create failed', err);
+    logger.error('Import create failed', err);
     return response.respondInternalServerError(res, [customMessages.errors.internalError]);
   }
 }

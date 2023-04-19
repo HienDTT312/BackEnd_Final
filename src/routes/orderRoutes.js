@@ -14,12 +14,14 @@ const { ROLES } = require("../configs/ms-constants");
 
 router.get('/project/order',isAuthenticated, orderController.getOrder);
 
-router.get('/project/order/:order_id',isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]),orderController.getOneOrder);
+router.get('/project/order/:order_id',isAuthenticated, orderController.getOneOrder);
 
-router.put('/project/order', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]),orderController.updateOrder);
+router.get('/project/detail/:order_id',isAuthenticated, orderController.getOneOrderDetail);
 
-router.post('/project/order', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]),orderController.createOrder);
+router.put('/project/order', isAuthenticated,orderController.updateOrder);
 
-router.delete('/project/order/:order_id', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]), orderController.deleteOrder);
+router.post('/project/order', isAuthenticated, orderController.createOrder);
+
+router.delete('/project/order/:order_id', isAuthenticated, orderController.deleteOrder);
 
 module.exports = router;

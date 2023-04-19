@@ -9,6 +9,7 @@ const {
 } = require('../middlewares/schemas/accountSchemas');
 const { isAuthorization } = require("../middlewares/authorization");
 const { ROLES } = require("../configs/ms-constants");
+const { uploadDocument } = require("../services/uploadFileService");
 
 // import route
 
@@ -16,9 +17,9 @@ router.get('/project/import',isAuthenticated, importController.getImport);
 
 router.get('/project/import/:import_id',isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]),importController.getOneImport);
 
-router.put('/project/import', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]),importController.updateImport);
+router.put('/project/import', isAuthenticated,  uploadDocument.array('documents', 6),isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]),importController.updateImport);
 
-router.post('/project/import', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]),importController.createImport);
+router.post('/project/import', isAuthenticated, uploadDocument.array('documents', 6), isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]),importController.createImport);
 
 router.delete('/project/import/:import_id', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]), importController.deleteImport);
 

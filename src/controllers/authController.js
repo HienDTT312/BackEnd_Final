@@ -76,13 +76,13 @@ exports.getIdentity = async (req, res) => {
 exports.loginCustomer = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const userInDB = await User.findOne({
+    const userInDB = await Customer.findOne({
       where: {
         email,
       },
     });
 
-    logger.info('User found', { userInDB });
+    logger.info('Custoemr found', { userInDB });
     if (userInDB) {
       const passwordHash = userInDB.password;
       const userData = {
@@ -92,8 +92,9 @@ exports.loginCustomer = async (req, res) => {
         avatar: userInDB.avatar,
         role_id: userInDB.role_id
       }
+      console.log('test 95')
       const getTimeNow = new Date();
-      logger.info('User data', { userData });
+      logger.info('Customer data', { userData });
       if (bcrypt.compareSync(password,passwordHash)) {
         console.log(true);
         const token = jwt.sign(userData ,'test', {
@@ -103,14 +104,18 @@ exports.loginCustomer = async (req, res) => {
         const refreshToken = jwt.sign(userData ,'test', {
           expiresIn: getTimeNow.getSeconds() + 600000
         })
-        const updateToken = await User.update({
+        const updateToken = await Customer.update({
           refreshToken
         }, {
           where: {
-            username
+            email
           }
         });
+        console.log('test');
+        console.log(token)
         res.send({token, refreshToken, userData});
+      } else {
+        console.log('abc')
       }
     }
   } catch (err) {
@@ -131,12 +136,12 @@ exports.getCustomerIdentity = async (req, res) => {
       },
     })
     if (user) {
-      logger.info('User found', { user });
+      logger.info('Customer found', { user });
       return response.respondOk(res, user);
     }
     return response.respondInternalServerError(res, [customMessages.errors.internalError]);
   } catch (err) {
-    logger.error('Cannot get user identity', err);
+    logger.error('Cannot get customer identity', err);
     return response.respondInternalServerError(res, [customMessages.errors.internalError]);
   }
 }
