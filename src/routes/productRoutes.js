@@ -46,6 +46,11 @@ router.delete('/project/document/:document_id', isAuthenticated, productControll
 
 router.post('/project/vote', isAuthenticated, productController.vote);
 
+router.post('/project/watch', isAuthenticated, productController.watch);
+
+router.post('/project/favorite', isAuthenticated, productController.favorite);
+
+
 // Export and download
 
 router.get('/project/csv', productController.exportProduct);

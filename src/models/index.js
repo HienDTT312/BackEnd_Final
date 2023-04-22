@@ -19,6 +19,8 @@ const orderModel = require('./order');
 const detailModel = require('./detail');
 const supportModel = require('./support');
 const importModel = require('./import');
+const watchModel = require('./product_watch');
+const favoriteModel = require('./product_favorite');
 
 const Role = roleModel(sequelize, Sequelize);
 const User = userModel(sequelize, Sequelize);
@@ -38,10 +40,11 @@ const Promotion = promotionModel(sequelize, Sequelize);
 const Detail = detailModel(sequelize, Sequelize);
 const Order = orderModel(sequelize, Sequelize);
 const Import = importModel(sequelize, Sequelize);
+const Watch = watchModel(sequelize, Sequelize);
 const Support = supportModel(sequelize, Sequelize);
+const Favorite = favoriteModel(sequelize, Sequelize);
 
 User.hasMany(Category, { as: 'categories', foreignKey: 'staff_id', sourceKey: 'user_id'});
-
 
 Product.belongsTo(Category, {foreignKey: 'category_id'}); // Adds fk_company to User
 Product.belongsTo(User, {foreignKey: 'user_id'}); // Adds fk_company to User
@@ -73,4 +76,6 @@ module.exports = {
   Detail,
   Customer,
   Support,
+  Watch,
+  Favorite,
 }

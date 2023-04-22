@@ -1,5 +1,5 @@
 const logger = require('../services/loggerService');
-const { User, Role, Product, ProductDocument,ProductComment, ProductVote, Category, View, Brand, Supplier } = require('../models');
+const { User, Role, Product, ProductDocument,ProductComment, ProductVote, Category, View, Brand, Supplier, Watch, Favorite } = require('../models');
 const { Op, where } = require('sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -533,6 +533,82 @@ exports.vote = async (req, res) => {
     return response.respondInternalServerError(res, [customMessages.errors.internalError]);
   } catch (err) {
     logger.error('Failed to vote', err);
+    return response.respondInternalServerError(res, [customMessages.errors.internalError]);
+  }
+}
+
+exports.watch = async (req, res) => {
+  try {
+    const data = req.body;
+    const payload = {
+      user_id: req.user.user_id,
+      product_id: data.product_id,
+    }
+    const checkWatchExisted = await Watch.findOne({
+      where: {
+        user_id: payload.user_id,
+        product_id: payload.product_id,
+      },
+      raw: true,
+    });
+
+    if (checkWatchExisted) {
+      const updatedWatch = await Watch.destroy({
+        where: payload
+      })
+
+      if (updatedWatch) {
+        logger.info('Watch', { updatedWatch });
+        return response.respondOk(res, updatedWatch);
+      }
+    }
+
+    const watch = await Watch.create(payload);
+    if (watch) {
+      logger.info('Watch', { watch });
+      return response.respondOk(res, watch);
+    }
+    return response.respondInternalServerError(res, [customMessages.errors.internalError]);
+  } catch (err) {
+    logger.error('Failed to watch', err);
+    return response.respondInternalServerError(res, [customMessages.errors.internalError]);
+  }
+}
+
+exports.favorite = async (req, res) => {
+  try {
+    const data = req.body;
+    const payload = {
+      user_id: req.user.user_id,
+      product_id: data.product_id,
+    }
+    const checkWatchExisted = await Favorite.findOne({
+      where: {
+        user_id: payload.user_id,
+        product_id: payload.product_id,
+      },
+      raw: true,
+    });
+
+    if (checkWatchExisted) {
+      const updatedWatch = await Favorite.destroy({
+        where: payload,
+      })
+
+      if (updatedWatch) {
+        logger.info('Favorite', { updatedWatch });
+        return response.respondOk(res, updatedWatch);
+      }
+    }
+
+    const watch = await Favorite.create(payload);
+    if (watch) {
+      logger.info('Watch', { watch });
+      return response.respondOk(res, watch);
+    }
+    return response.respondInternalServerError(res, [customMessages.errors.internalError]);
+  } catch (err) {
+    logger.error('Failed to watch', err);
     return response.respondInternalServerError(res, [customMessages.errors.internalError]);
   }
 }
