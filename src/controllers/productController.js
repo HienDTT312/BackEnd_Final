@@ -181,7 +181,6 @@ exports.getOneProduct = async (req, res) => {
   try {
     const productId = req.params.product_id;
 
-
     const product = await Product.findOne({
         where: {
           product_id: productId,
@@ -227,7 +226,19 @@ exports.getOneProduct = async (req, res) => {
       }
     })
 
+    const watch = await Watch.count({
+      where: {
+        user_id: req.user.user_id,
+        product_id: productId
+      }
+    })
 
+    const favorite = await Favorite.count({
+      where: {
+        user_id: req.user.user_id,
+        product_id: productId
+      }
+    })
 
     const finalResult = {
       product_id: product.product_id,
@@ -247,6 +258,8 @@ exports.getOneProduct = async (req, res) => {
 
     finalResult.count = count;
     finalResult.comments = comments;
+    finalResult.watch = watch;
+    finalResult.favorite = favorite;
 
     logger.info('Product found', { finalResult });
     return response.respondOk(res, finalResult);
