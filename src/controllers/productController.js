@@ -226,20 +226,6 @@ exports.getOneProduct = async (req, res) => {
       }
     })
 
-    const watch = await Watch.count({
-      where: {
-        user_id: req.user.user_id,
-        product_id: productId
-      }
-    })
-
-    const favorite = await Favorite.count({
-      where: {
-        user_id: req.user.user_id,
-        product_id: productId
-      }
-    })
-
     const finalResult = {
       product_id: product.product_id,
       title: product.title,
@@ -258,8 +244,6 @@ exports.getOneProduct = async (req, res) => {
 
     finalResult.count = count;
     finalResult.comments = comments;
-    finalResult.watch = watch;
-    finalResult.favorite = favorite;
 
     logger.info('Product found', { finalResult });
     return response.respondOk(res, finalResult);
