@@ -5,7 +5,12 @@ const customMessages = require('../configs/customMessages');
 
 exports.getCart = async (req, res) => {
   try {
-    const result = await Cart.findAll();
+    const userId = req.user.user_id;
+    const result = await Cart.findAll({
+      where: {
+        user_id: userId,
+      }
+    });
     if (result) {
       logger.info('Cart list', {cart: result});
       return response.respondOk(res, result);
@@ -19,18 +24,32 @@ exports.getCart = async (req, res) => {
 
 exports.createCart = async (req, res) => {
   try {
-    const data = req.body;
+    const payload = req.body;
 
-    const productInCart = await Cart.findAll({
+    const data = {...payload};
+    const productInCart = await Cart.findOne({
       where: {
         user_id: data.user_id,
-        product: data.product_id,
-      }
+        product_id: data.product_id,
+      }, raw: true
     });
+    console.log(productInCart)
 
     if (productInCart) {
-      data.amount = data.amount + productInCart.amount;
+      const amount = parseInt(data.amount, 10) + parseInt(productInCart.amount, 10);
+      const cart = await Cart.update({
+        amount: amount,
+      }, {
+        where: {
+          cart_id: productInCart.cart_id,
+        }
+      });
+      if (cart) {
+        logger.info('Cart created success', { cart });
+        return response.respondOk(res, cart);
+      }
     }
+
 
     const cart = await Cart.create(data);
     if (cart) {
@@ -52,6 +71,8 @@ exports.getOneCart = async (req, res, next) => {
         cart_id,
       }
     });
+
+    console.log(cart)
     if (cart) {
       logger.info('Cart found', { cart });
       return response.respondOk(res, cart);
