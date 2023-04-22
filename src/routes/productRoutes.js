@@ -18,6 +18,10 @@ router.get('/project/product', productController.getProduct);
 
 router.get('/project/product/:product_id', productController.getOneProduct);
 
+router.get('/project/product/:product_id', productController.getOneProduct);
+
+router.get('/project/check/:product_id',isAuthenticated, productController.checkOneProduct);
+
 router.post('/project/product', uploadDocument.array('documents', 6), productController.createProduct);
 
 router.delete('/project/product/:product_id', productController.deleteProduct);

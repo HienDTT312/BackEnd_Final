@@ -177,6 +177,37 @@ exports.exportProduct = async (req, res) => {
   }
 }
 
+exports.checkOneProduct = async (req, res) => {
+  try {
+    const productId = req.params.product_id;
+
+    const watch = await Watch.findOne({
+      where: {
+        product_id: productId,
+        user_id: req.user.user_id,
+      }
+    })
+
+    const favorite = await Favorite.findOne({
+      where: {
+        product_id: productId,
+        user_id: req.user.user_id,
+      }
+    })
+
+    const finalResult = {
+     watch,
+     favorite
+    }
+
+    logger.info('Product found', { finalResult });
+    return response.respondOk(res, finalResult);
+  } catch (err) {
+    logger.error('Failed to product', err)
+    return response.respondInternalServerError(res, [customMessages.errors.internalError]);
+  }
+}
+
 exports.getOneProduct = async (req, res) => {
   try {
     const productId = req.params.product_id;
