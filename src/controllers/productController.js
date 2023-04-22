@@ -1,5 +1,5 @@
 const logger = require('../services/loggerService');
-const { User, Role, Product, ProductDocument,ProductComment, ProductVote, Category, View, Brand, Supplier, Watch, Favorite } = require('../models');
+const { User, Role, Product, ProductDocument,ProductComment, ProductVote, Category, View, Brand, Supplier, Watch, Favorite, Customer } = require('../models');
 const { Op, where } = require('sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -190,7 +190,7 @@ exports.getOneProduct = async (req, res) => {
           },
           {
             model: ProductComment, as:'comments', include: [{
-              model: User, attributes: ['full_name', 'avatar']
+              model: Customer, attributes: ['last_name', 'first_name', 'avatar']
             }],
           },
           {
@@ -204,10 +204,11 @@ exports.getOneProduct = async (req, res) => {
       return response.respondInternalServerError(res, [customMessages.errors.productNotFound]);
     }
 
+
     const comments = product.comments.map( comment => {
       return {
-        full_name: comment.user.full_name,
-        avatar: comment.user.avatar,
+        full_name: comment.customer.last_name + ' ' + comment.customer.first_name,
+        avatar: comment.customer.avatar,
         comment: comment.comment,
         created_date: comment.created_date,
         updated_date: comment.updated_date,
@@ -333,11 +334,11 @@ exports.createComment = async (req, res) => {
         return response.respondInternalServerError(res, [customMessages.errors.productNotFound]);
       }
 
-      const author = await User.findOne({
+      const author = await Customer.findOne({
         where: {
-          user_id: product.user_id,
+          user_id: payload.user_id,
         },
-        attributes: ['username'],
+        attributes: ['email'],
       });
 
       if (!author) {
@@ -350,7 +351,7 @@ exports.createComment = async (req, res) => {
         created_date: comment.created_date,
         id: data.product_id,
         comment: comment.comment,
-        username: author.username,
+        email: author.email,
       })
 
       return response.respondOk(res, comment);
