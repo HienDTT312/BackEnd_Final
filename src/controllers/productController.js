@@ -1,5 +1,5 @@
 const logger = require('../services/loggerService');
-const { User, Role, Product, ProductDocument,ProductComment, ProductVote, Category, View, Brand, Supplier } = require('../models');
+const { User, Role, Product, ProductDocument,ProductComment, ProductVote, Category, View, Brand, Supplier, Watch, Favorite, Customer } = require('../models');
 const { Op, where } = require('sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -177,10 +177,40 @@ exports.exportProduct = async (req, res) => {
   }
 }
 
-exports.getOneProduct = async (req, res) => {
+exports.checkOneProduct = async (req, res) => {
   try {
     const productId = req.params.product_id;
 
+    const watch = await Watch.findOne({
+      where: {
+        product_id: productId,
+        user_id: req.user.user_id,
+      }
+    })
+
+    const favorite = await Favorite.findOne({
+      where: {
+        product_id: productId,
+        user_id: req.user.user_id,
+      }
+    })
+
+    const finalResult = {
+     watch,
+     favorite
+    }
+
+    logger.info('Product found', { finalResult });
+    return response.respondOk(res, finalResult);
+  } catch (err) {
+    logger.error('Failed to product', err)
+    return response.respondInternalServerError(res, [customMessages.errors.internalError]);
+  }
+}
+
+exports.getOneProduct = async (req, res) => {
+  try {
+    const productId = req.params.product_id;
 
     const product = await Product.findOne({
         where: {
@@ -191,7 +221,7 @@ exports.getOneProduct = async (req, res) => {
           },
           {
             model: ProductComment, as:'comments', include: [{
-              model: User, attributes: ['full_name', 'avatar']
+              model: Customer, attributes: ['last_name', 'first_name', 'avatar']
             }],
           },
           {
@@ -205,10 +235,11 @@ exports.getOneProduct = async (req, res) => {
       return response.respondInternalServerError(res, [customMessages.errors.productNotFound]);
     }
 
+
     const comments = product.comments.map( comment => {
       return {
-        full_name: comment.user.full_name,
-        avatar: comment.user.avatar,
+        full_name: comment.customer.last_name + ' ' + comment.customer.first_name,
+        avatar: comment.customer.avatar,
         comment: comment.comment,
         created_date: comment.created_date,
         updated_date: comment.updated_date,
@@ -226,8 +257,6 @@ exports.getOneProduct = async (req, res) => {
         product_id: productId,
       }
     })
-
-
 
     const finalResult = {
       product_id: product.product_id,
@@ -336,11 +365,11 @@ exports.createComment = async (req, res) => {
         return response.respondInternalServerError(res, [customMessages.errors.productNotFound]);
       }
 
-      const author = await User.findOne({
+      const author = await Customer.findOne({
         where: {
-          user_id: product.user_id,
+          user_id: payload.user_id,
         },
-        attributes: ['username'],
+        attributes: ['email'],
       });
 
       if (!author) {
@@ -353,7 +382,7 @@ exports.createComment = async (req, res) => {
         created_date: comment.created_date,
         id: data.product_id,
         comment: comment.comment,
-        username: author.username,
+        email: author.email,
       })
 
       return response.respondOk(res, comment);
@@ -533,6 +562,82 @@ exports.vote = async (req, res) => {
     return response.respondInternalServerError(res, [customMessages.errors.internalError]);
   } catch (err) {
     logger.error('Failed to vote', err);
+    return response.respondInternalServerError(res, [customMessages.errors.internalError]);
+  }
+}
+
+exports.watch = async (req, res) => {
+  try {
+    const data = req.body;
+    const payload = {
+      user_id: req.user.user_id,
+      product_id: data.product_id,
+    }
+    const checkWatchExisted = await Watch.findOne({
+      where: {
+        user_id: payload.user_id,
+        product_id: payload.product_id,
+      },
+      raw: true,
+    });
+
+    if (checkWatchExisted) {
+      const updatedWatch = await Watch.destroy({
+        where: payload
+      })
+
+      if (updatedWatch) {
+        logger.info('Watch', { updatedWatch });
+        return response.respondOk(res, updatedWatch);
+      }
+    }
+
+    const watch = await Watch.create(payload);
+    if (watch) {
+      logger.info('Watch', { watch });
+      return response.respondOk(res, watch);
+    }
+    return response.respondInternalServerError(res, [customMessages.errors.internalError]);
+  } catch (err) {
+    logger.error('Failed to watch', err);
+    return response.respondInternalServerError(res, [customMessages.errors.internalError]);
+  }
+}
+
+exports.favorite = async (req, res) => {
+  try {
+    const data = req.body;
+    const payload = {
+      user_id: req.user.user_id,
+      product_id: data.product_id,
+    }
+    const checkWatchExisted = await Favorite.findOne({
+      where: {
+        user_id: payload.user_id,
+        product_id: payload.product_id,
+      },
+      raw: true,
+    });
+
+    if (checkWatchExisted) {
+      const updatedWatch = await Favorite.destroy({
+        where: payload,
+      })
+
+      if (updatedWatch) {
+        logger.info('Favorite', { updatedWatch });
+        return response.respondOk(res, updatedWatch);
+      }
+    }
+
+    const watch = await Favorite.create(payload);
+    if (watch) {
+      logger.info('Watch', { watch });
+      return response.respondOk(res, watch);
+    }
+    return response.respondInternalServerError(res, [customMessages.errors.internalError]);
+  } catch (err) {
+    logger.error('Failed to watch', err);
     return response.respondInternalServerError(res, [customMessages.errors.internalError]);
   }
 }

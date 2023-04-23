@@ -18,6 +18,10 @@ router.get('/project/product', productController.getProduct);
 
 router.get('/project/product/:product_id', productController.getOneProduct);
 
+router.get('/project/product/:product_id', productController.getOneProduct);
+
+router.get('/project/check/:product_id',isAuthenticated, productController.checkOneProduct);
+
 router.post('/project/product', uploadDocument.array('documents', 6), productController.createProduct);
 
 router.delete('/project/product/:product_id', productController.deleteProduct);
@@ -46,6 +50,11 @@ router.delete('/project/document/:document_id', isAuthenticated, productControll
 
 router.post('/project/vote', isAuthenticated, productController.vote);
 
+router.post('/project/watch', isAuthenticated, productController.watch);
+
+router.post('/project/favorite', isAuthenticated, productController.favorite);
+
+
 // Export and download
 
 router.get('/project/csv', productController.exportProduct);
@@ -59,5 +68,6 @@ router.get('/project/dashboard', isAuthenticated,productController.getCount)
 router.get('/project/download/:document_id', productController.download);
 
 router.get('/project/download-all/:product_id', productController.downloadAll);
+
 
 module.exports = router;

@@ -11,6 +11,9 @@ const { isAuthorization } = require("../middlewares/authorization");
 const { ROLES } = require("../configs/ms-constants");
 
 // order route
+// router.get('/project/cart',isAuthenticated, orderController.get);
+
+// router.post('/project/cart', orderController.createCart);
 
 router.get('/project/order',isAuthenticated, orderController.getOrder);
 
@@ -23,5 +26,8 @@ router.put('/project/order', isAuthenticated,orderController.updateOrder);
 router.post('/project/order', isAuthenticated, orderController.createOrder);
 
 router.delete('/project/order/:order_id', isAuthenticated, orderController.deleteOrder);
+
+
+
 
 module.exports = router;

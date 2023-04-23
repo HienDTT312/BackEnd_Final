@@ -14,12 +14,12 @@ const { ROLES } = require("../configs/ms-constants");
 
 router.get('/project/cart',isAuthenticated, cartController.getCart);
 
-router.get('/project/cart/:cart_id',isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]),cartController.getOneCart);
+router.get('/project/cart/:cart_id',isAuthenticated,cartController.getOneCart);
 
-router.put('/project/cart', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]),cartController.updateCart);
+router.put('/project/cart', isAuthenticated, cartController.updateCart);
 
-router.post('/project/cart', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]),cartController.createCart);
+router.post('/project/cart', isAuthenticated, cartController.createCart);
 
-router.delete('/project/cart/:cart_id', isAuthenticated, isAuthorization([ROLES.ADMIN, ROLES.QA_MANAGER]), cartController.deleteCart);
+router.delete('/project/cart/:cart_id', isAuthenticated, cartController.deleteCart);
 
 module.exports = router;
