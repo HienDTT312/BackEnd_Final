@@ -9,7 +9,7 @@ module.exports = (sequelize, type) => sequelize.define('favorites', {
 		type: type.INTEGER, allowNull: false,
 	},
 	created_date: {
-		type: type.DATE, allowNull: true,
+		type: type.DATE, allowNull: true, defaultValue: new Date(),
 	},
 }, {
 	timestamps: false,
