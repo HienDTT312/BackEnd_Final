@@ -17,7 +17,7 @@ const { ROLES } = require("../configs/ms-constants");
 
 router.get('/project/customer', customerController.getCustomer);
 
-router.get('/project/customer/:username', customerController.getOneCustomer);
+router.get('/project/customer/:email', customerController.getOneCustomer);
 
 router.put('/project/customer/:user_id', uploadAvatar.single('avatar'), customerController.updateCustomer);
 

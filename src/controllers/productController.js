@@ -48,8 +48,30 @@ exports.createProduct = async (req, res) => {
 
 exports.getProduct = async (req, res) => {
   try {
-    const where = {};
 
+    const where = {
+
+    };
+
+    if (req.query.full_name) {
+      where.description = {
+        [Op.like]: '%' + req.query.full_name + '%'
+      }
+    }
+    if (req.query.title) {
+      where.title = {
+        [Op.like]: '%' + req.query.title + '%'
+      }
+    }
+
+    if (req.query.brand_id) {
+      where.brand_name = {
+        [Op.like]: '%' + req.query.brand_id + '%'
+      }    }
+
+    if (req.query.category_id) {
+      where.category_id  = req.query.category_id;
+    }
 
     const products = await Product.findAll({
         where,
@@ -59,9 +81,12 @@ exports.getProduct = async (req, res) => {
           {
             model: Category, as: 'category', attributes: ['category_name']
           },
-        ]
+        ],
+        // raw: true
       },
     );
+
+    // console.log(products[2].category);
 
     if (!products) {
       return response.respondInternalServerError(res, [customMessages.errors.productNotFound]);
@@ -69,6 +94,7 @@ exports.getProduct = async (req, res) => {
     const finalResult = [];
 
     for (let i = 0; i < products.length; i++) {
+    // console.log(products[i].category.category_name);
 
       finalResult.push({
         product_id: products[i].product_id,
@@ -76,6 +102,9 @@ exports.getProduct = async (req, res) => {
         title: products[i].title,
         description: products[i].description,
         status: products[i].status,
+        price: products[i].price,
+        author:  products[i].author,
+        amount:  products[i].amount,
         brand_name:  products[i].brand_name,
         supplier_name:  products[i].supplier_name,
         created_date: products[i].created_date,

@@ -5,6 +5,9 @@ module.exports = (sequelize, type) => sequelize.define('suppliers', {
   supplier_name: {
     type: type.TEXT, allowNull: false,
   },
+  supplier_address: {
+    type: type.TEXT, allowNull: false,
+  },
   phone_number: {
     type: type.TEXT, allowNull: false,
   },

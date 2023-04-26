@@ -92,9 +92,9 @@ exports.deleteSupport = async (req, res) => {
       logger.info('Support deleted', { result });
       return response.respondOk(res, result);
     }
-    return response.respondInternalServerError(res, [customMessages.errors.internalError]);
+    return response.respondOk(res, result);
   } catch (err) {
-    logger.error('Support delete failed', err);
+    logger.error('Support delete failed', {err});
     return response.respondInternalServerError(res, [customMessages.errors.internalError]);
   }
 }
