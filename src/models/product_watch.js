@@ -1,4 +1,4 @@
-module.exports = (sequelize, type) => sequelize.define('product_watches', {
+module.exports = (sequelize, type) => sequelize.define('watches', {
 	watch_id: {
 		type: type.INTEGER, autoIncrement: true, primaryKey: true, allowNull: false,
 	},
