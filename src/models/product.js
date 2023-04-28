@@ -32,7 +32,7 @@ module.exports = (sequelize, type) => sequelize.define('products', {
       type: type.INTEGER, allowNull: true,
     },
     amount: {
-      type: type.INTEGER, allowNull: true,
+      type: type.INTEGER, allowNull: true, defaultValue: 0,
     },
     price: {
       type: type.INTEGER, allowNull: true,

@@ -250,7 +250,7 @@ exports.getOneProduct = async (req, res) => {
           },
           {
             model: ProductComment, as:'comments', include: [{
-              model: Customer, attributes: ['last_name', 'first_name', 'avatar']
+              model: Customer, as:'customer', attributes: ['last_name', 'first_name', 'avatar']
             }],
           },
           {
