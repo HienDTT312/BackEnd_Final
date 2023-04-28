@@ -1,5 +1,5 @@
 const logger = require('../services/loggerService');
-const { User, Role, Cart, Product } = require('../models');
+const { User, Role, Cart, Product, ProductDocument } = require('../models');
 const response = require('../services/responseService');
 const customMessages = require('../configs/customMessages');
 
@@ -12,7 +12,9 @@ exports.getCart = async (req, res) => {
       },
       include: [
         {
-          model: Product, as: 'product', attributes: ['title', 'amount', 'price']
+          model: Product, as: 'product', attributes: ['title', 'amount', 'price'], include: [{
+            model: ProductDocument, as:'document', attributes: ['document']
+          }],
         },
       ]
     });
