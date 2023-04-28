@@ -1,5 +1,0 @@
-include:
-  - project: 'infra/common-ci'
-    file: 'multiStageMain.yml'
-  - project: 'infra/common-ci'
-    file: 'deployDevEnv.yml'

@@ -1,8 +1,0 @@
-project: project
-configVersion: 1
----
-image: project
-dockerfile: Dockerfile
-args:
-  GIT_SSH_PRIVATE_KEY: |-
-{{ env "GIT_SSH_PRIVATE_KEY" | indent 4 }}
