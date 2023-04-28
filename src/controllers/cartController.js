@@ -12,7 +12,7 @@ exports.getCart = async (req, res) => {
       },
       include: [
         {
-          model: Product, as: 'product', attributes: ['title', 'amount']
+          model: Product, as: 'product', attributes: ['title', 'amount', 'price']
         },
       ]
     });
