@@ -1,5 +1,5 @@
 const logger = require('../services/loggerService');
-const { User, Role, Cart } = require('../models');
+const { User, Role, Cart, Product } = require('../models');
 const response = require('../services/responseService');
 const customMessages = require('../configs/customMessages');
 
@@ -9,7 +9,12 @@ exports.getCart = async (req, res) => {
     const result = await Cart.findAll({
       where: {
         user_id: userId,
-      }
+      },
+      include: [
+        {
+          model: Product, as: 'product', attributes: ['product_name']
+        },
+      ]
     });
     if (result) {
       logger.info('Cart list', {cart: result});

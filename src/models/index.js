@@ -49,9 +49,9 @@ Product.belongsTo(User, {foreignKey: 'user_id'}); // Adds fk_company to User
 Product.belongsTo(Category, {foreignKey: 'category_id'}); // Adds fk_company to User
 View.belongsTo(Product, {foreignKey: 'product_id'});
 // Customer.hasMany(ProductComment, { as: 'product_comments', foreignKey: 'user_id', sourceKey: 'user_id'});
+Cart.belongsTo(Product, { foreignKey: 'product_id'})
 
 ProductComment.belongsTo(Customer, {foreignKey: 'user_id'}); // Adds fk_company to User
-
 Role.hasMany(User, { as: 'users', foreignKey: 'role_id', sourceKey: 'role_id' });
 Product.hasMany(ProductComment, { as: 'comments',  foreignKey: 'product_id', sourceKey: 'product_id'});
 Product.hasMany(ProductVote, { as: 'votes',  foreignKey: 'product_id', sourceKey: 'product_id'});
