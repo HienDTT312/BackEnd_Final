@@ -36,6 +36,12 @@ exports.createOrder = async (req, res) => {
           product_id: cart[i].product_id,
           amount: cart[i].amount,
         });
+
+        await Cart.destroy({
+          where: {
+            user_id: data.user_id,
+          }
+        })
       };
       return response.respondOk(res, order);
     }
