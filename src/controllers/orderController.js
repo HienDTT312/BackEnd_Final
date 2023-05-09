@@ -2,6 +2,8 @@ const logger = require('../services/loggerService');
 const { User, Role, Order, Detail, Cart } = require('../models');
 const response = require('../services/responseService');
 const customMessages = require('../configs/customMessages');
+const config = require('../configs/config');
+const dateFormat = require('dateformat');
 
 exports.getOrder = async (req, res) => {
   try {
@@ -241,9 +243,9 @@ exports.vnpayReturn = async (req, res, next) => {
 
   vnp_Params = sortObject(vnp_Params);
 
-  var config = require('config');
-  var tmnCode = config.get('vnp_TmnCode');
-  var secretKey = config.get('vnp_HashSecret');
+  // var config = require('config');
+  var tmnCode = config.vnp.vnp_TmnCode;
+  var secretKey = config.vnp.vnp_HashSecret;
 
   var querystring = require('qs');
   var signData = querystring.stringify(vnp_Params, { encode: false });
