@@ -27,7 +27,10 @@ router.post('/project/order', orderController.createOrder);
 
 router.delete('/project/order/:order_id', isAuthenticated, orderController.deleteOrder);
 
+router.post('/project/order/create_payment_url', orderController.vnpay);
+// router.delete('/patient/detail/:detail_id', isAuthenticated, detailController.deletePayment);
 
+router.get('/project/order/vnpay_return', orderController.vnpayReturn);
 
 
 module.exports = router;

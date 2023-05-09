@@ -52,6 +52,10 @@ router.post('/project/vote', isAuthenticated, productController.vote);
 
 router.post('/project/watch', isAuthenticated, productController.watch);
 
+router.get('/project/watch', isAuthenticated, productController.getWatch);
+
+router.get('/project/favorite', isAuthenticated, productController.getFavorite);
+
 router.post('/project/favorite', isAuthenticated, productController.favorite);
 
 

@@ -633,6 +633,36 @@ exports.watch = async (req, res) => {
   }
 }
 
+exports.getWatch = async (req, res) => {
+  try {
+    const user_id = req.user.user_id;
+    const watch = await Watch.findAll({
+      where: {
+        user_id: user_id,
+      },
+      raw: true,
+    });
+    return response.respondOk(res, watch);
+  } catch (err) {
+    logger.error('Failed to watch', err);
+    return response.respondInternalServerError(res, [customMessages.errors.internalError]);  }
+}
+
+exports.getFavorite = async (req, res) => {
+  try {
+    const user_id = req.user.user_id;
+    const favorites = await Favorite.findAll({
+      where: {
+        user_id: user_id,
+      },
+      raw: true,
+    });
+    return response.respondOk(res, favorites);
+  } catch (err) {
+    logger.error('Failed to watch', err);
+    return response.respondInternalServerError(res, [customMessages.errors.internalError]);  }
+}
+
 exports.favorite = async (req, res) => {
   try {
     const data = req.body;
