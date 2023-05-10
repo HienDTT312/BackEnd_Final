@@ -23,7 +23,7 @@ router.get('/project/detail/:order_id',isAuthenticated, orderController.getOneOr
 
 router.put('/project/order', isAuthenticated,orderController.updateOrder);
 
-router.post('/project/order', orderController.createOrder);
+router.post('/project/order',isAuthenticated, orderController.createOrder);
 
 router.delete('/project/order/:order_id', isAuthenticated, orderController.deleteOrder);
 

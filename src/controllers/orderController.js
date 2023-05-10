@@ -21,16 +21,19 @@ exports.getOrder = async (req, res) => {
 
 exports.createOrder = async (req, res) => {
   try {
-    const data = req.body;
-    const order = await Order.create(data);
+    const user_id = req.user.user_id;
+    const order = await Order.create({
+      user_id: user_id,
+    });
     if (order) {
       logger.info('Order created success', { order });
 
       const cart = await Cart.findAll({
         where: {
-          user_id: data.user_id,
+          user_id: user_id,
         }, raw: true,
       });
+      console.log('34')
 
       for (let i = 0; i < cart.length; i++) {
         await Detail.create({
@@ -39,12 +42,14 @@ exports.createOrder = async (req, res) => {
           amount: cart[i].amount,
         });
 
-        await Cart.destroy({
+
+      };
+
+      await Cart.destroy({
           where: {
-            user_id: data.user_id,
+            user_id,
           }
         })
-      };
       return response.respondOk(res, order);
     }
     return response.respondInternalServerError(res, [customMessages.errors.internalError]);

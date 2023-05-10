@@ -214,7 +214,7 @@ exports.checkOneProduct = async (req, res) => {
       where: {
         product_id: productId,
         user_id: req.user.user_id,
-      }
+      },
     })
 
     const favorite = await Favorite.findOne({
@@ -640,9 +640,19 @@ exports.getWatch = async (req, res) => {
       where: {
         user_id: user_id,
       },
+      include: [
+        {
+          model: Product, as: 'product', attributes: ['title', 'amount', 'price'], include: [{
+            model: ProductDocument, as:'documents', attributes: ['document']
+          }],
+        },
+      ],
       raw: true,
     });
-    return response.respondOk(res, watch);
+    if (watch) {
+      return response.respondOk(res, watch);
+    }
+    return response.respondInternalServerError(res, ['Not any watches']);
   } catch (err) {
     logger.error('Failed to watch', err);
     return response.respondInternalServerError(res, [customMessages.errors.internalError]);  }
@@ -655,9 +665,20 @@ exports.getFavorite = async (req, res) => {
       where: {
         user_id: user_id,
       },
+      include: [
+        {
+          model: Product, as: 'product', attributes: ['title', 'amount', 'price'], include: [{
+            model: ProductDocument, as:'documents', attributes: ['document']
+          }],
+        },
+      ],
       raw: true,
     });
-    return response.respondOk(res, favorites);
+
+    if (favorites) {
+      return response.respondOk(res, favorites);
+    }
+    return response.respondInternalServerError(res, ['Not any favorite']);
   } catch (err) {
     logger.error('Failed to watch', err);
     return response.respondInternalServerError(res, [customMessages.errors.internalError]);  }
