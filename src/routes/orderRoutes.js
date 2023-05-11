@@ -23,11 +23,14 @@ router.get('/project/detail/:order_id',isAuthenticated, orderController.getOneOr
 
 router.put('/project/order', isAuthenticated,orderController.updateOrder);
 
-router.post('/project/order', orderController.createOrder);
+router.post('/project/order',isAuthenticated, orderController.createOrder);
 
 router.delete('/project/order/:order_id', isAuthenticated, orderController.deleteOrder);
 
+router.post('/project/order/create_payment_url', orderController.vnpay);
+// router.delete('/patient/detail/:detail_id', isAuthenticated, detailController.deletePayment);
 
+router.get('/project/order/vnpay_return', orderController.vnpayReturn);
 
 
 module.exports = router;

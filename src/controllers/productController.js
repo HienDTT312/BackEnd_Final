@@ -214,7 +214,7 @@ exports.checkOneProduct = async (req, res) => {
       where: {
         product_id: productId,
         user_id: req.user.user_id,
-      }
+      },
     })
 
     const favorite = await Favorite.findOne({
@@ -631,6 +631,57 @@ exports.watch = async (req, res) => {
     logger.error('Failed to watch', err);
     return response.respondInternalServerError(res, [customMessages.errors.internalError]);
   }
+}
+
+exports.getWatch = async (req, res) => {
+  try {
+    const user_id = req.user.user_id;
+    const watch = await Watch.findAll({
+      where: {
+        user_id: user_id,
+      },
+      include: [
+        {
+          model: Product, as: 'product', attributes: ['title', 'amount', 'price'], include: [{
+            model: ProductDocument, as:'documents', attributes: ['document']
+          }],
+        },
+      ],
+      raw: true,
+    });
+    if (watch) {
+      return response.respondOk(res, watch);
+    }
+    return response.respondInternalServerError(res, ['Not any watches']);
+  } catch (err) {
+    logger.error('Failed to watch', err);
+    return response.respondInternalServerError(res, [customMessages.errors.internalError]);  }
+}
+
+exports.getFavorite = async (req, res) => {
+  try {
+    const user_id = req.user.user_id;
+    const favorites = await Favorite.findAll({
+      where: {
+        user_id: user_id,
+      },
+      include: [
+        {
+          model: Product, as: 'product', attributes: ['title', 'amount', 'price'], include: [{
+            model: ProductDocument, as:'documents', attributes: ['document']
+          }],
+        },
+      ],
+      raw: true,
+    });
+
+    if (favorites) {
+      return response.respondOk(res, favorites);
+    }
+    return response.respondInternalServerError(res, ['Not any favorite']);
+  } catch (err) {
+    logger.error('Failed to watch', err);
+    return response.respondInternalServerError(res, [customMessages.errors.internalError]);  }
 }
 
 exports.favorite = async (req, res) => {
