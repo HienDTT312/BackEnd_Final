@@ -1,5 +1,5 @@
 const logger = require('../services/loggerService');
-const { User, Role, Product, ProductDocument,ProductComment, ProductVote, Category, View, Brand, Supplier, Watch, Favorite, Customer } = require('../models');
+const { User, Role, Product, ProductDocument,ProductComment, ProductVote, Category, View, Brand, Supplier, Watch, Favorite, Customer, Order } = require('../models');
 const { Op, where } = require('sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -324,6 +324,10 @@ exports.updateProduct = async (req, res) => {
       title: data.title,
       category_id: data.category_id,
       status: data.status,
+      price: data.price,
+      author: data.author,
+      brand_name: data.brand_name,
+      supplier_name: data.supplier_name,
     }
 
     const updatedProduct = await Product.update(updatePayload, {
@@ -750,6 +754,8 @@ exports.getCount = async (req, res) => {
 
   });
 
+
+
   const finalResult = {
     user: userCount,
     product: productCount,
@@ -767,9 +773,14 @@ exports.getCountAdmin = async (req, res) => {
   const userCount = await User.count({
   });
 
+  const paymentCount = await Order.count({
+  });
+
+
   const finalResult = {
     user: userCount,
     product: productCount,
+    payment: paymentCount,
   }
 
   return response.respondOk(res,finalResult);

@@ -104,7 +104,6 @@ exports.getOneOrderDetail = async (req, res, next) => {
         })
       }
 
-
       return response.respondOk(res, finalResult);
     };
     return response.respondInternalServerError(res, [customMessages.errors.orderNotFound]);
