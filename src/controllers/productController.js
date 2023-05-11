@@ -324,6 +324,10 @@ exports.updateProduct = async (req, res) => {
       title: data.title,
       category_id: data.category_id,
       status: data.status,
+      price: data.price,
+      author: data.author,
+      brand_name: data.brand_name,
+      supplier_name: data.supplier_name,
     }
 
     const updatedProduct = await Product.update(updatePayload, {
