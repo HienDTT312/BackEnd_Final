@@ -51,6 +51,8 @@ View.belongsTo(Product, {foreignKey: 'product_id'});
 // Customer.hasMany(ProductComment, { as: 'product_comments', foreignKey: 'user_id', sourceKey: 'user_id'});
 Cart.belongsTo(Product, { foreignKey: 'product_id'})
 Favorite.belongsTo(Product, { foreignKey: 'product_id'})
+Detail.belongsTo(Product, { foreignKey: 'product_id'})
+
 Watch.belongsTo(Product, { foreignKey: 'product_id'})
 
 // Product.belongsTo(ProductDocument, { foreignKey: 'product_id'});

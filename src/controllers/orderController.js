@@ -1,5 +1,5 @@
 const logger = require('../services/loggerService');
-const { User, Role, Order, Detail, Cart } = require('../models');
+const { User, Role, Order, Detail, Cart, Product } = require('../models');
 const response = require('../services/responseService');
 const customMessages = require('../configs/customMessages');
 const config = require('../configs/config');
@@ -85,10 +85,27 @@ exports.getOneOrderDetail = async (req, res, next) => {
       where: {
         order_id,
       },
+      include: [
+        {
+          model: Product, as: 'product', attributes: ['title', 'amount', 'price'],
+          }],
+          // raw: true,
+
     });
+    const finalResult = [];
     if (order) {
       logger.info('Detail found', { order });
-      return response.respondOk(res, order);
+
+      for (let i = 0; i < order.length; i++) {
+        finalResult.push({
+          amount: order[i].amount,
+          title: order[i].product.title,
+          price: order[i].product.price,
+        })
+      }
+
+
+      return response.respondOk(res, finalResult);
     };
     return response.respondInternalServerError(res, [customMessages.errors.orderNotFound]);
   } catch (err) {
