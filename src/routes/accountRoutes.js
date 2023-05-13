@@ -23,7 +23,7 @@ router.put('/project/user/:user_id', isAuthenticated, uploadAvatar.single('avata
 
 router.put('/project/user/password', isAuthenticated, validator(userPasswordSchema), accountController.updateUserPassword);
 
-router.post('/project/user',  isAuthenticated,uploadAvatar.single('avatar'), isAuthorization([ROLES.ADMIN]), accountController.createUser);
+router.post('/project/user',  isAuthenticated,uploadAvatar.single('avatar'), isAuthorization([ROLES.ADMIN]), validator(userCreateSchema), accountController.createUser);
 
 router.delete('/project/user/:user_id', isAuthenticated,accountController.deleteUser);
 

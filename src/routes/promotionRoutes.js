@@ -17,7 +17,7 @@ router.get('/project/promotion',isAuthenticated, promotionController.getPromotio
 
 router.get('/project/promotion/:promotion_id',isAuthenticated,promotionController.getOnePromotion);
 
-router.put('/project/promotion', isAuthenticated,promotionController.updatePromotion);
+router.put('/project/promotion/:promotion_id',uploadDocument.array('documents', 6), isAuthenticated,promotionController.updatePromotion);
 
 router.post('/project/promotion', isAuthenticated,uploadDocument.array('documents', 6), promotionController.createPromotion);
 

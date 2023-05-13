@@ -138,7 +138,7 @@ exports.exportProduct = async (req, res) => {
             model: Category, as: 'category', attributes: ['category_name']
           },
           {
-            model: User, as: 'user', attributes: ['full_name']
+            model: Customer, as: 'user', attributes: ['full_name']
           },
         ]
       },

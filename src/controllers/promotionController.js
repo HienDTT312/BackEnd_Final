@@ -55,11 +55,15 @@ exports.getOnePromotion = async (req, res, next) => {
 exports.updatePromotion = async (req, res) => {
   try {
     const data = req.body;
+    console.log("abc", data);
+    console.log('123', req.params.promotion_id)
     const promotion = await Promotion.findOne({
       where: {
-        promotion_id: data.promotion_id
+        promotion_id: req.params.promotion_id
       },
     });
+
+    console.log(promotion)
 
     if (!promotion) {
       logger.info('Promotion found');
@@ -67,10 +71,16 @@ exports.updatePromotion = async (req, res) => {
     }
 
      // console.log('Test')
-    data.updated_date = new Date();
-    const updatePromotion = await Promotion.update(data, {
+    const updatePromotion = await Promotion.update({
+      description: data.description,
+      titlle: data.title,
+      discount: data.discount,
+      supplier_id: data.supplier_id,
+      category_id: data.category_id,
+      updated_date: new Date()
+    }, {
       where: {
-        promotion_id: data.promotion_id,
+        promotion_id: 7,
       }
     });
 
