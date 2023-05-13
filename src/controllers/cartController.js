@@ -50,11 +50,18 @@ exports.createCart = async (req, res) => {
     })
     console.log(productInCart)
 
-    if (product.amount < productInCart.amount || product.amount < data.amount) {
+    if ((productInCart && product.amount < productInCart.amount)
+      || (product && product.amount < data.amount)) {
       console.log(product);
       console.log(productInCart);
       return response.respondInternalServerError(res, ["Not enough amount"]);
     }
+
+    // if (product && product.amount < productInCart.amount) {
+    //   console.log(product);
+    //   console.log(productInCart);
+    //   return response.respondInternalServerError(res, ["Not enough amount"]);
+    // }
 
     if (productInCart) {
       const amount = parseInt(data.amount, 10) + parseInt(productInCart.amount, 10);
