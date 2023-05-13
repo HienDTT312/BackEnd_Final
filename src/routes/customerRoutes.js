@@ -19,7 +19,7 @@ router.get('/project/customer', customerController.getCustomer);
 
 router.get('/project/customer/:email', customerController.getOneCustomer);
 
-router.put('/project/customer/:user_id', uploadAvatar.single('avatar'), customerController.updateCustomer);
+router.put('/project/customer', uploadAvatar.single('avatar'), customerController.updateCustomer);
 
 router.put('/project/customer/password', validator(customerPasswordSchema), customerController.updateCustomerPassword);
 

@@ -18,6 +18,8 @@ exports.getCart = async (req, res) => {
         },
       ]
     });
+
+
     if (result) {
       logger.info('Cart list', {cart: result});
       return response.respondOk(res, result);
@@ -40,7 +42,19 @@ exports.createCart = async (req, res) => {
         product_id: data.product_id,
       }, raw: true
     });
+
+    const product = await Product.findOne({
+      where: {
+        product_id: data.product_id
+      }
+    })
     console.log(productInCart)
+
+    if (product.amount < productInCart.amount || product.amount < data.amount) {
+      console.log(product);
+      console.log(productInCart);
+      return response.respondInternalServerError(res, ["Not enough amount"]);
+    }
 
     if (productInCart) {
       const amount = parseInt(data.amount, 10) + parseInt(productInCart.amount, 10);

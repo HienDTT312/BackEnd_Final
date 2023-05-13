@@ -128,7 +128,7 @@ exports.createCustomer = async (req, res) => {
 
 exports.updateCustomer = async (req, res) => {
   try {
-    const customerId = req.params.user_id;
+    // const customerId = req.params.user_id;
     const data = req.body;
     const updateData = {
       full_name: data.full_name,
@@ -146,7 +146,7 @@ exports.updateCustomer = async (req, res) => {
     }
     const result = await Customer.update(updateData, {
       where: {
-        user_id: customerId
+        email: data.email
       }
     });
     if (result) {
