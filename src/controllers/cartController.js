@@ -52,7 +52,7 @@ exports.createCart = async (req, res) => {
 
     if ((productInCart && product.amount < productInCart.amount)
     || (product && product.amount < data.amount)
-    || (productInCart && (product.amount + productInCart.amount) < data.amount)) {
+    || (productInCart && data.amount > productInCart.amount && (product.amount + productInCart.amount) < data.amount)) {
     console.log(product);
     console.log(productInCart);
     return response.respondInternalServerError(res, ["Not enough amount"]);
