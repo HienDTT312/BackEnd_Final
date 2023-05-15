@@ -32,7 +32,9 @@ exports.createImport = async (req, res) => {
         });
         if (product) {
           await Product.update({
-            amount: product.amount + data.amount,
+            amount: parseInt(product.amount)
+             + parseInt( data.amount)
+            ,
           }, {
             where: {
               product_id: data.product_id,
