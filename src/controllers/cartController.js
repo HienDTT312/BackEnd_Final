@@ -50,9 +50,9 @@ exports.createCart = async (req, res) => {
     })
     console.log(productInCart)
 
-    if ((productInCart && product.amount < productInCart.amount && data.amount > productInCart.amount)
-    || (product && product.amount < data.amount && data.amount > productInCart.amount)
-    || (productInCart && data.amount > productInCart.amount && (product.amount + productInCart.amount) < data.amount)) {
+    if ((productInCart && product.amount < productInCart.amount && data.amount > productInCart.amount && data.amount !== productInCart.amount)
+    || (product && product.amount < data.amount && data.amount > productInCart.amount && data.amount !== productInCart.amount)
+    || (productInCart && data.amount !== productInCart.amount && data.amount > productInCart.amount && (product.amount + productInCart.amount) < data.amount)) {
     console.log(product);
     console.log(productInCart);
     return response.respondInternalServerError(res, ["Not enough amount"]);
@@ -134,9 +134,9 @@ exports.updateCart = async (req, res) => {
           product_id: productInCart.cart_id
         }
       });
-      if ((productInCart && product.amount < productInCart.amount && data.amount > productInCart.amount)
-        || (product && product.amount < data.amount && data.amount > productInCart.amount)
-        || (productInCart && data.amount > productInCart.amount && (product.amount + productInCart.amount) < data.amount)) {
+      if ((productInCart && product.amount < productInCart.amount && data.amount > productInCart.amount && data.amount !== productInCart.amount)
+      || (product && product.amount < data.amount && data.amount > productInCart.amount && data.amount !== productInCart.amount)
+      || (productInCart && data.amount !== productInCart.amount && data.amount > productInCart.amount && (product.amount + productInCart.amount) < data.amount)) {
           console.log(product);
         console.log(productInCart);
         return response.respondInternalServerError(res, ["Not enough amount"]);
