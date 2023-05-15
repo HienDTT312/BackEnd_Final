@@ -51,11 +51,12 @@ exports.createCart = async (req, res) => {
     console.log(productInCart)
 
     if ((productInCart && product.amount < productInCart.amount)
-      || (product && product.amount < data.amount)) {
-      console.log(product);
-      console.log(productInCart);
-      return response.respondInternalServerError(res, ["Not enough amount"]);
-    }
+    || (product && product.amount < data.amount)
+    || (productInCart && (product.amount + productInCart.amount) < data.amount)) {
+    console.log(product);
+    console.log(productInCart);
+    return response.respondInternalServerError(res, ["Not enough amount"]);
+  }
 
     // if (product && product.amount < productInCart.amount) {
     //   console.log(product);
@@ -120,6 +121,31 @@ exports.updateCart = async (req, res) => {
         cart_id: data.cart_id
       },
     });
+
+    const productInCart = await Cart.findOne({
+      where: {
+        cart_id: data.cart_id,
+      }, raw: true
+    });
+
+    if (productInCart) {
+      const product = await Product.findOne({
+        where: {
+          product_id: productInCart.cart_id
+        }
+      });
+      if ((productInCart && product.amount < productInCart.amount)
+        || (product && product.amount < data.amount)
+        || (productInCart && (product.amount + productInCart.amount) < data.amount)) {
+        console.log(product);
+        console.log(productInCart);
+        return response.respondInternalServerError(res, ["Not enough amount"]);
+      }
+    }
+
+
+
+
 
     if (!cart) {
       logger.info('Cart found');

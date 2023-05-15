@@ -1,5 +1,5 @@
 const logger = require('../services/loggerService');
-const { User, Role, Import } = require('../models');
+const { User, Role, Import, Product } = require('../models');
 const response = require('../services/responseService');
 const customMessages = require('../configs/customMessages');
 
@@ -24,6 +24,22 @@ exports.createImport = async (req, res) => {
     const importProduct = await Import.create(data);
     if (importProduct) {
       logger.info('Import created success', { importProduct });
+      if (importProduct) {
+        const product = await Product.findOne({
+          where: {
+            product_id: importProduct.product_id,
+          }
+        });
+        if (product) {
+          await Product.update({
+            amount: product.amount + data.amount,
+          }, {
+            where: {
+              product_id: data.product_id,
+            }
+          });
+        }
+      }
       return response.respondOk(res, importProduct);
     }
     return response.respondInternalServerError(res, [customMessages.errors.internalError]);
