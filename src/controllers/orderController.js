@@ -7,7 +7,12 @@ const dateFormat = require('dateformat');
 
 exports.getOrder = async (req, res) => {
   try {
-    const result = await Order.findAll();
+    const userId = req.user.user_id
+    const result = await Order.findAll({
+      where: {
+        user_id: userId,
+      }
+    });
     if (result) {
       logger.info('Order list', {order: result});
       return response.respondOk(res, result);
